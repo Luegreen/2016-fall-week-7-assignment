@@ -36,15 +36,7 @@ d3.queue()
             .domain([0,4])
             .range([0,w]);
 
-        var axisY = d3.axisLeft()
-            .scale(scaleY)
-            .tickSize(-w-200);
-    //a negative tick mark goes right and coveres the entire width of the chart
-
-        plot.append('g')
-            .attr('class','axis axis-y')
-            .attr('transform','translate(-100,0)')
-            .call(axisY);
+       
     
      //   draw(rows2012);
    
@@ -100,7 +92,7 @@ function draw(rows){
                 .merge(barsEnter) //UPDATE + ENTER
                 .transition().duration(1000)
                 .attr('transform',function(d,i){
-                        return 'translate('+scaleX(i)+'0)';
+                        return 'translate('+scaleX(i)+',0)';
                 });
 
                 barsTransition.select("rect")
@@ -108,6 +100,19 @@ function draw(rows){
                 .attr("y", function(d) { return scaleY(d.count); })
                 .attr("height", function(d) { return h- scaleY(d.count); })
                 .attr("width", 30);
+    //axis
+    
+     var axisY = d3.axisLeft()
+            .scale(scaleY)
+            .tickSize(-w-200);
+    //a negative tick mark goes right and coveres the entire width of the chart
+
+        plot.append('g')
+            .attr('class','axis axis-y')
+            .attr('transform','translate(-100,0)')
+            .call(axisY);
+        
+        
 }
 
      
